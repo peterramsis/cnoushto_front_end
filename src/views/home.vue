@@ -1,7 +1,7 @@
 <template>
-    <div>
-        Home
-    </div>
+    <header-app></header-app>
+    Home
+    <footer-app></footer-app>
 </template>
 
 <script>
