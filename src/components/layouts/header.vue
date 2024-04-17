@@ -1,23 +1,26 @@
 <template>
-    <header>
-        <h1>مرحبا بالعالم!</h1>
-      <div class="container">
-        <div class="row">
-          <section class="col-1">
-               col-1
-          </section>
-
-          <section class="col-1">
-                col-2
-          </section>
-        </div> 
-      </div>
+    <header class="d-flex justify-content-around mt-3">
+        <section class="logo">
+           <img :src="logo" alt="Logo" srcset="" class="img-fluid" style="width: 100px">
+        </section>
+        <nav class="d-flex align-items-center">
+           <ul class="nav ">
+             <li><a href="#" class="nav-link">التسجيل</a></li>
+             <li><a href="#" class="nav-link">تسجيل الدخول </a></li>
+           </ul>
+        </nav>
     </header>
 </template>
 
 <script>
+import logo from "@/assets/images/logo.png";
 export default {
-    name: 'header-app',
+  name: 'header-app',
     
+  setup() {
+    return {
+      logo
+    }
+  }
 }
 </script>

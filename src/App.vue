@@ -1,18 +1,11 @@
 <template>
- 
-  <section class="all">
-    <header-app></header-app>
-  </section>
- 
+    <router-view/>
 </template>
 
-<style scoped>
-
-</style>
-
 <script>
-import { useCountStore } from './stores/moudels/counter';
-import { useAuthStore } from './stores/moudels/auth';
+import './assets/scss/global.scss';
+import { useCountStore } from '@/stores/modules/counter';
+import { useAuthStore } from '@/stores/modules/auth';
 export default {
   setup() {
     const store = useCountStore();

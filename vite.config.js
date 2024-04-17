@@ -9,4 +9,11 @@ export default defineConfig({
       // Add more aliases as needed
     },
   },
+    // css: {
+    //     preprocessorOptions: {
+    //         scss: {
+    //             additionalData: `@import "@/assets/scss/global.scss";`,
+    //         },
+    //     },
+    // },
 })
