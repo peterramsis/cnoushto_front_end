@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header-app></header-app>
+        Home
     </div>
 </template>
 
