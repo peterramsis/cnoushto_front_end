@@ -6,7 +6,7 @@
         <nav class="d-flex align-items-center">
            <ul class="nav ">
              <li><router-link to="register" class="nav-link">التسجيل</router-link></li>
-             <li><a href="#" class="nav-link">تسجيل الدخول </a></li>
+             <li><router-link to="/" class="nav-link">الرئيسية</router-link></li>
            </ul>
         </nav>
     </header>
