@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import "@/assets/scss/global.scss";
 import "bootstrap/dist/js/bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
@@ -8,7 +9,7 @@ import { createPinia } from "pinia";
 import HeaderApp from "@/components/layouts/header.vue";
 import FooterApp from "@/components/layouts/footer.vue";
 import ButtonApp from "@/components/component/button.vue";
-import router from './router';
+import router from "./router";
 
 const pinia = createPinia();
 

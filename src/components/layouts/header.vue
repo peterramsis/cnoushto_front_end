@@ -5,8 +5,10 @@
         </section>
         <nav class="d-flex align-items-center">
            <ul class="nav ">
+             <li><router-link to="/" class="nav-link">الرئيسية</router-link></li>
+             <li><router-link to="login" class="nav-link">تسجيل الدخول</router-link></li>
              <li><router-link to="register" class="nav-link" exact>التسجيل</router-link></li>
-             <li><router-link to="/" class="nav-link" exact>الرئيسية</router-link></li>
+            
            </ul>
         </nav>
     </header>

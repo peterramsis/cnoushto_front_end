@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
@@ -8,21 +8,32 @@ export default defineConfig({
       // This allows the server to correctly resolve URLs.
       // Otherwise, URLs without a file extension will not be served correctly.
       // Read more: https://vitejs.dev/config/#server-historyfallback
-      mode: 'history',
+      mode: "history",
     },
   },
   plugins: [vue()],
-   resolve: {
+  resolve: {
     alias: {
-      '@': '/src',
+      "@": "/src",
       // Add more aliases as needed
     },
   },
-    // css: {
-    //     preprocessorOptions: {
-    //         scss: {
-    //             additionalData: `@import "@/assets/scss/global.scss";`,
-    //         },
-    //     },
-    // },
-})
+  // css: {
+  //     preprocessorOptions: {
+  //         scss: {
+  //             additionalData: `@import "@/assets/scss/global.scss";`,
+  //         },
+  //     },
+  // },
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "@/assets/scss/variables.scss";
+          @import "@/assets/scss/mixins.scss";
+        `,
+      },
+    },
+  },
+});

@@ -1,7 +1,6 @@
 <template>
-    <section :class="{btn_site: true , active: active}" :style="{ '--custom_background' : backgroundColor , '--custom_hover': hoverColor}">
-         {{ title }}
-    </section>
+    <input type="submit" :value="title" :class="{btn_site: true}" :style="{ '--custom_background' : backgroundColor , '--custom_hover': hoverColor , '--color_text': colorText , '--disabled' :disabled}" :disabled="disabled" />
+   
 </template>
 
 
@@ -16,13 +15,12 @@
     background-color: var(--custom_background);
     color: #fff;
     font-size: 16px;
-    &:hover{
-      cursor: pointer;
-      background-color: var(--custom_hover) !important;
-    }
-    &.active{
-        background-color: var(--custom_hover) !important;
-    }
+    border:none;
+   
+
+   
+    
+    
   }
 </style>
 
@@ -41,9 +39,13 @@ export default {
         type: String,
        
       },
-      active: {
+      disabled: {
           type: Boolean,
           default: false
+      },
+      colorText:{
+          type: String,
+          default: 'white'
       }
   }
 }

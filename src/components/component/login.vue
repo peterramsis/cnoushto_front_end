@@ -1,18 +1,105 @@
 <template>
-   <section class="login">
-      <form action="">
-          <section class="form-group">
-                <label for="" class="form-label">Name</label>
-                <input
-                    type="text"
-                    name=""
-                    id=""
-                    class="form-control"
-                    placeholder=""
-                    aria-describedby="helpId"
-                />
-                <small id="helpId" class="text-muted">Help text</small>
-          </section>
+  <div class="container d-flex justify-content-center">
+    <section class="login-card">
+      <form action="" @submit="login">
+        <section class="row">
+          <h3 class="text-center text-white">تسجيل الدخول</h3>
+         
+          <div class="col-12 col-md-12 col-lg-12">
+            
+            
+            <section class="">
+              <label for="" class="form-label text-white">البريد الالكترونى</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                v-model="store.email"
+               
+              />
+              <span class="text-danger" v-if="store.errors.email">  {{ store.errors.email[0] }}  </span>
+            </section>
+
+            <section class="">
+              <label for="" class="form-label text-white"> كلمة المرور </label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder=""
+                v-model="store.password"
+               
+              />
+              <span class="text-danger" v-if="store.errors.password">  {{ store.errors.password[0] }}  </span>
+            </section>
+        
+
+            <section class="d-flex justify-content-center">
+              <button-app
+                class="mt-4"
+                title="تسجيل الدخول"
+                backgroundColor="#4F0E0E"
+                hoverColor="#FFF1F1"
+                colorText="#4F0E0E"
+                :disabled="disabled"
+              ></button-app>
+            </section>
+          </div>
+        </section>
       </form>
-   </section>
+    </section>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+
+.login-card {
+  width: 400px;
+  .photo-picture {
+    img {
+      height: 300px;
+      margin: 10px auto;
+      /* width: 100%; */
+      object-fit: cover;
+      display: flex;
+      border-radius: 51%;
+    }
+  }
+  form {
+    font-family: "Cairo", sans-serif;
+
+    background-color: #dfbda3;
+    padding: 10px 20px;
+    @include border-radius(10px);
+
+    input[type="text"] {
+      @include border-radius(12px);
+    }
+  }
+}
+</style>
+
+<script>
+import { ref } from 'vue';
+import { useAuthStore } from '@/stores/modules/auth';
+export default {
+  name: "register",
+  setup() {
+
+    const store = useAuthStore();
+  
+    
+
+    function login(e){
+        e.preventDefault();
+    
+    }
+
+
+    return {
+      store,
+      login
+      
+    };
+  },
+};
+</script>
