@@ -155,7 +155,7 @@
     padding: 10px 20px;
     @include border-radius(10px);
 
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
       @include border-radius(12px);
     }
   }

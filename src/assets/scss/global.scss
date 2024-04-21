@@ -20,6 +20,14 @@ a{
   }
 }
 
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+  border-color: transparent !important;
+}
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #4f0e0e !important;
+}
 textarea:focus, 
 textarea.form-control:focus, 
 input.form-control:focus, 

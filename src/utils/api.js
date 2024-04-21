@@ -27,6 +27,7 @@ export const getData = ($loading, router) => {
       return res.data;
     })
     .catch((err) => {
+      console.log(`--error- ${err}`);
       loader.hide();
       return err;
     });
@@ -48,9 +49,7 @@ export const postData = (router, data, isUploadFile = false) => {
       return res;
     })
     .catch((err) => {
-      if (err.response.status == 422) {
-        return err.response;
-      }
+      return err.response;
     });
 };
 

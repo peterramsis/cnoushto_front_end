@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { postData } from "@/utils/api.js";
+import { postData, getData } from "@/utils/api.js";
 import Swal from "sweetalert2";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -23,22 +23,61 @@ export const useAuthStore = defineStore("auth", {
         password: this.password,
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.status == 422) {
+            this.errors = response.data["errors"];
+          } else if (response.status == 200) {
             this.user = response.data["data"];
             router.push({ path: "/" });
             localStorage.setItem("token", response.data["token"]);
             this.token = response.data["token"];
+            this.email = "";
+            this.password = "";
           }
         })
         .catch((error) => {
-          if (error.response.status == 422) {
-            this.errors = error.response.data["errors"];
-          } else {
-            this.errors = error;
-          }
+          this.errors = error;
         });
     },
-    logout() {},
+    logout(loading, router) {
+      getData(loading, "auth/logout")
+        .then((res) => {
+          if (res instanceof Error) {
+            Swal.fire({
+              icon: "error",
+              title: "خطا...",
+              text: res.message,
+              confirmButtonText: "اوك",
+            });
+          } else {
+            localStorage.removeItem("token");
+            this.token = null;
+            this.user = null;
+            router.push({ path: "/login" });
+          }
+        })
+        .catch((error) => {
+          console.log(`--------------${error}`);
+        });
+    },
+    getUser(loading) {
+      getData(loading, "auth/me")
+        .then((res) => {
+          if (res instanceof Error) {
+            Swal.fire({
+              icon: "error",
+              title: "خطا...",
+              text: res.message,
+              confirmButtonText: "اوك",
+            });
+            // Handle the error appropriately
+          } else {
+            this.user = res["data"];
+          }
+        })
+        .catch((error) => {
+          console.log(`--------------${error}`);
+        });
+    },
     register(data) {
       postData("auth/register", data, true).then((res) => {
         if (res.status == 422) {

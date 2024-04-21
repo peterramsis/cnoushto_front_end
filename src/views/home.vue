@@ -1,11 +1,13 @@
 <template>
     <header-app></header-app>
-    Home
+    <slider-app></slider-app>
     <footer-app></footer-app>
 </template>
 
 <script>
+
 export default {
-    name: 'home'
+    name: 'home',
+   
 }
 </script>

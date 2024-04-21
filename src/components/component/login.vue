@@ -71,7 +71,7 @@
     padding: 10px 20px;
     @include border-radius(10px);
 
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
       @include border-radius(12px);
     }
   }
@@ -81,23 +81,25 @@
 <script>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/modules/auth';
+import { useRouter } from 'vue-router';
 export default {
   name: "register",
   setup() {
 
     const store = useAuthStore();
-  
-    
+    const disabled = ref(false);
+    const router = useRouter();
 
     function login(e){
         e.preventDefault();
-    
+        store.login(router);
     }
 
 
     return {
       store,
-      login
+      login,
+      disabled
       
     };
   },

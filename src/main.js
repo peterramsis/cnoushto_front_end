@@ -9,14 +9,19 @@ import { createPinia } from "pinia";
 import HeaderApp from "@/components/layouts/header.vue";
 import FooterApp from "@/components/layouts/footer.vue";
 import ButtonApp from "@/components/component/button.vue";
+import SliderApp from "@/components/component/slider.vue";
 import router from "./router";
-
+import { LoadingPlugin } from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 const pinia = createPinia();
 
 const app = createApp(App);
+app.use(pinia);
 app.component("header-app", HeaderApp);
 app.component("button-app", ButtonApp);
 app.component("footer-app", FooterApp);
-app.use(pinia);
+app.component("slider-app", SliderApp);
+
 app.use(router);
+app.use(LoadingPlugin);
 app.mount("#app");
