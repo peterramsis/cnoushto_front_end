@@ -37,10 +37,7 @@ export default {
 
         onMounted(() => {
             store.showTopic(loading,routes.params.id );
-
             document.body.title = store.topic.name;
-
-            console.log(routes.params.id)
         });
 
         return {
