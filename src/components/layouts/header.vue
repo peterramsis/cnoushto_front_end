@@ -16,7 +16,9 @@
                   الاقسام
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2" v-if="storeCategories">
-                  <li><a class="dropdown-item" href="#" v-for="category in storeCategories.getCategories" :key="category.id"> {{ category.name }} </a></li>
+                  <li>
+                    <router-link  :to='`/topics/${category.id}`' v-for="category in storeCategories.getCategories" :key="category.id" class="dropdown-item">{{ category.name }} </router-link>
+                  </li>
                 </ul>
               </div>
              </li>

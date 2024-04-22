@@ -5,6 +5,7 @@ import Login from "@/views/login.vue";
 import Home from "@/views/home.vue";
 import Profile from "@/views/user/profile.vue";
 import ShowTopic from "@/views/topic/show.vue";
+import Topics from "@/views/topic/topics.vue";
 import PageNotFound from "@/components/component/not-found.vue";
 import { useTopicStore } from "@/stores/modules/topic";
 
@@ -49,6 +50,16 @@ const routes = [
     path: "/topic/:id",
     name: "topic",
     component: ShowTopic,
+    meta: {
+      requiresAuth: true,
+      title: "click",
+    },
+  },
+
+   {
+    path: "/topics/:id",
+    name: "topics",
+    component: Topics,
     meta: {
       requiresAuth: true,
       title: "click",

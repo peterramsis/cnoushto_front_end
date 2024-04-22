@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-12 col-md-12">
-                <Carousel :itemsToShow="3" :wrapAround="true" :transition="500" autoplay="2000">
+                <Carousel :itemsToShow="3" :wrapAround="true" :transition="500" autoplay="500">
                     <Slide v-for="slide in store.getLastFiveTopics" :key="slide">
                       <router-link :to='`/topic/${slide.id}`'>
                         <div class="carousel__item">
