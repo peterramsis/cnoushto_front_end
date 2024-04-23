@@ -59,8 +59,8 @@ export const useTopicStore = defineStore("topic", {
           });
         });
     },
-    getTopicsAction(loading, id) {
-      getData(loading, `topic?size=5&id_category=${id}`)
+    getTopicsAction(loading, id, page = 1, size = 5) {
+      getData(loading, `topic?size=${size}&id_category=${id}&page=${page}`)
         .then((res) => {
           if (res instanceof Error) {
             Swal.fire({
@@ -69,9 +69,8 @@ export const useTopicStore = defineStore("topic", {
               text: res.message,
               confirmButtonText: "اوك",
             });
-            // Handle the error appropriately
           } else {
-            this.topics = res.data;
+            this.topics = res;
           }
         })
         .catch((error) => {

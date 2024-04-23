@@ -16,8 +16,8 @@
                   الاقسام
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2" v-if="storeCategories">
-                  <li>
-                    <router-link  :to='`/topics/${category.id}`' v-for="category in storeCategories.getCategories" :key="category.id" class="dropdown-item">{{ category.name }} </router-link>
+                  <li v-for="category in storeCategories.getCategories" :key="category.id">
+                    <router-link  class="dropdown-item"   :to='`/topics/${category.id}`' >{{ category.name }} </router-link>
                   </li>
                 </ul>
               </div>
@@ -51,11 +51,12 @@
 
 <script>
 import logo from "@/assets/images/logo.png";
-import { onMounted, ref } from "vue";
+import { onMounted, ref ,watch  } from "vue";
 import { useLoading } from 'vue-loading-overlay';
 import { useAuthStore } from '@/stores/modules/auth';
-import { useRouter } from "vue-router";
+import {  useRouter , useRoute } from "vue-router";
 import { useCategoryStore } from "@/stores/modules/category";
+import { useTopicStore } from "../../stores/modules/topic";
 export default {
   name: 'header-app',
     
@@ -64,6 +65,10 @@ export default {
     const token = ref("");
     const store = useAuthStore();
     const storeCategories = useCategoryStore();
+    const storeTopics = useTopicStore();
+
+    const routes = useRoute();
+    
     const loading = useLoading({
       color: "green",
     container: true, // Set container to null to use default behavior
@@ -71,14 +76,23 @@ export default {
     onCancel: () => {},
     });
 
+    
     const router = useRouter()
+    
 
     function logout(){
       store.logout(loading,router);
-    }
+    }      
 
-      
+    watch(routes, (to, from) => {
+    
+      // Check if the route has changed
+      if (to.fullPath == from.fullPath) {
+        storeTopics.getTopicsAction(loading, to.params.id);
+      }
+    });
 
+    
 
     onMounted(() => {
       token.value = localStorage.getItem("token");
@@ -94,7 +108,8 @@ export default {
       token,
       store,
       logout,
-      storeCategories
+      storeCategories,
+      
     }
   }
 }
