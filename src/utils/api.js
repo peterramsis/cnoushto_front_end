@@ -1,7 +1,7 @@
 import axios from "axios";
 import url from "./constants";
 
-export const getData = ($loading, router) => {
+export const getData = ($loading, router, data = null) => {
   let loader = $loading.show({
     // Optional parameters
     container: false,
@@ -21,6 +21,7 @@ export const getData = ($loading, router) => {
         lan: localStorage.getItem("lan"),
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
+      params: data,
     })
     .then((res) => {
       loader.hide();

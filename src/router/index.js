@@ -56,7 +56,7 @@ const routes = [
     },
   },
 
-   {
+  {
     path: "/topics/:id",
     name: "topics",
     component: Topics,
@@ -72,6 +72,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  linkActiveClass: "active",
 });
 
 router.beforeEach((to, from, next) => {

@@ -5,12 +5,16 @@ import Swal from "sweetalert2";
 export const useTopicStore = defineStore("topic", {
   state: () => ({
     topics: [],
+    sliderTopic: [],
     lastFiveTopics: [],
     topic: "",
   }),
   actions: {
-    getActionLastFiveTopics(loading) {
-      getData(loading, "lastFiveTopic")
+    getActionLastFiveTopics(loading, idCategory = "") {
+      getData(
+        loading,
+        "lastFiveTopic" + (idCategory ? `?id_category=${idCategory}` : "")
+      )
         .then((res) => {
           if (res instanceof Error) {
             Swal.fire({
@@ -22,6 +26,34 @@ export const useTopicStore = defineStore("topic", {
             // Handle the error appropriately
           } else {
             this.lastFiveTopics = res.data;
+          }
+        })
+        .catch((error) => {
+          console.log(`--------------${error}`);
+          Swal.fire({
+            icon: "error",
+            title: "خطا...",
+            text: error.message,
+            confirmButtonText: "اوك",
+          });
+        });
+    },
+    getActionSliderTopic(loading, idCategory = "") {
+      getData(
+        loading,
+        "lastFiveTopic" + (idCategory ? `?id_category=${idCategory}` : "")
+      )
+        .then((res) => {
+          if (res instanceof Error) {
+            Swal.fire({
+              icon: "error",
+              title: "خطا...",
+              text: res.message,
+              confirmButtonText: "اوك",
+            });
+            // Handle the error appropriately
+          } else {
+            this.sliderTopic = res.data;
           }
         })
         .catch((error) => {
@@ -90,6 +122,9 @@ export const useTopicStore = defineStore("topic", {
     },
     getLastFiveTopics: (state) => {
       return state.lastFiveTopics;
+    },
+    getSliderTopic: (state) => {
+      return state.sliderTopic;
     },
   },
 });

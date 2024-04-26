@@ -42,3 +42,32 @@ input[type=number]:focus,
 [contenteditable].form-control:focus {
   box-shadow: inset 0 -1px 0 #ddd;
 }
+
+
+.pagination{
+  .page-item{
+    margin: 10px 4px;
+    border-radius: 10px;
+    &.active{
+  
+      .page-link{
+        background-color:$color-secondary;
+        color:#fff;
+      
+      }
+    }
+    .page-link{
+      border-radius: 50%;
+      border: 1px solid $color-secondary;
+      background-color:#fff;
+      color:$color-secondary;
+      &:hover{
+        color:$color-tertiary !important;
+      }
+    }
+
+    .pagination-next-nav{
+      border-radius: 10px;
+    }
+  }
+}
