@@ -139,6 +139,30 @@ export const useTopicStore = defineStore("topic", {
           });
         });
     },
+    getYourFavoriteTopicsAction(loading, page = 1, size = 5) {
+      getData(loading, `favorite?size=${size}&&page=${page}`)
+        .then((res) => {
+          if (res instanceof Error) {
+            Swal.fire({
+              icon: "error",
+              title: "خطا...",
+              text: res.message,
+              confirmButtonText: "اوك",
+            });
+          } else {
+            this.topics = res;
+          }
+        })
+        .catch((error) => {
+          console.log(`--------------${error}`);
+          Swal.fire({
+            icon: "error",
+            title: "خطا...",
+            text: error.message,
+            confirmButtonText: "اوك",
+          });
+        });
+    },
   },
   getters: {
     getTopics: (state) => {

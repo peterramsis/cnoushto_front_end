@@ -1,7 +1,7 @@
 <template>
     <section class="topics" v-if="store.topics">
         <div class="container">
-            <line-head text="مواضيعك"></line-head>
+            <line-head :text="title"></line-head>
             <div class="row">
                 <div class="col-md-4"  v-for="topic in store.topics.data" :key="topic.id">
                 
@@ -110,7 +110,7 @@
 
 <script>
 
-import { onMounted, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useTopicStore } from '@/stores/modules/topic';
 import { useLoading } from 'vue-loading-overlay';
 import { useRoute } from 'vue-router';
@@ -119,37 +119,46 @@ import { useRoute } from 'vue-router';
 
 export default {
   name: 'topics',
-  
-  setup() {
+  props:{
+    data: String
+  },
+  setup(props) {
 
       const store = useTopicStore();
-    const routes = useRoute()
+    const routes = useRoute();
+    
     const loading = useLoading({
         container: ()=> true,  // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
     onCancel: () => {},
     });
 
+    const title = computed(() => {
+      return props.data === "yourTopic" ? "مواضعيك" : "المواضعيك المفضلة";
+    });
+
+
     
     onMounted(() => {
         console.log("click");
-        store.getYourTopicsAction(loading);
+        props.data == "yourTopic" ? store.getYourTopicsAction(loading) : store.getYourFavoriteTopicsAction(loading);
     })
-
-    
-
-
-    return { 
-        store,
-        
-        handlePaginationChange
-    }
-
-    
 
     function handlePaginationChange(newPage) {
               store.getYourTopicsAction(loading, newPage);
       }
+
+    
+
+    return { 
+        store,
+        handlePaginationChange,
+        title
+    }
+
+    
+
+   
 
   }
 }

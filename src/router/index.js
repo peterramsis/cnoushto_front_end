@@ -7,7 +7,9 @@ import Profile from "@/views/user/profile.vue";
 import ShowTopic from "@/views/topic/show.vue";
 import Topics from "@/views/topic/topics.vue";
 import YourTopics from "@/views/topic/your_topic.vue";
+import FavoriteTopic from "@/views/topic/favorite.vue";
 import PageNotFound from "@/components/component/not-found.vue";
+import about from "@/views/about.vue";
 import { useTopicStore } from "@/stores/modules/topic";
 
 const routes = [
@@ -73,6 +75,25 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "مواضعيك",
+    },
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: about,
+    meta: {
+      requiresAuth: true,
+      title: "عن الموقع",
+    },
+  },
+
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: FavoriteTopic,
+    meta: {
+      requiresAuth: true,
+      title: "المواضيع المفضلة",
     },
   },
 

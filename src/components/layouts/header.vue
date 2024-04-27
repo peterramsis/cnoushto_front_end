@@ -25,6 +25,9 @@
 
              <li><router-link to="/your_topics" class="nav-link" exact v-if="token">مواضعيك</router-link></li>
 
+             <li><router-link to="/favorites" class="nav-link" exact v-if="token">المواضيع المفضلة</router-link></li>
+     
+             <li><router-link to="/about" class="nav-link" exact v-if="token"> عن الموقع</router-link></li>
 
              <li v-if="token">
               <div class="dropdown">
@@ -38,6 +41,8 @@
                 </ul>
               </div>
              </li>
+
+        
 
            </ul>
         </nav>

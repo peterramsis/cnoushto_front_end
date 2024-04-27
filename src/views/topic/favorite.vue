@@ -1,7 +1,7 @@
 <template>
     <section class="your_topic">
         <header-app></header-app>
-        <your-topics data="yourTopic"></your-topics>
+        <your-topics data="favorite"></your-topics>
         <footer-app></footer-app>
     </section>
 </template>
