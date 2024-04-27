@@ -4,8 +4,8 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 # screenshot home page
 
-![Home page!](/assets/images/1.jpg "Home page")
+![Home page!](/assets/images/1.png "Home page")
 
 # screenshot topics page
 
-![Topic page!](/assets/images/2.jpg "Topic page")
+![Topic page!](/assets/images/2.png "Topic page")
