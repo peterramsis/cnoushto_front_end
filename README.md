@@ -8,7 +8,7 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 # screenshot topics page
 
-![Topic page!](/src/assets/images/2.jpg "Topic page")
+![Topic page!](/src/assets/images/2.png "Topic page")
 
 # screenshot about page
 ![About page!](/src/assets/images/3.png "About page")
