@@ -4,14 +4,14 @@ import url from "./constants";
 export const getData = ($loading, router, data = null) => {
   let loader = $loading.show({
     // Optional parameters
-    container: false,
+    container: null,
     canCancel: true,
     onCancel: () => {},
-    color: "blue",
-    backgroundColor: "#ccc",
+    color: "#4F0E0E",
+    backgroundColor: "#FFF1F1",
     width: 200,
     height: 200,
-    loader: "bars",
+    loader: "dots",
     opacity: 1,
   });
 

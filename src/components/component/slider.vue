@@ -4,7 +4,7 @@
             <div class="col-12 col-lg-12 col-md-12">
                 <Carousel :itemsToShow=3 :wrapAround="true" :transition=500 autoplay=500>
                     <Slide v-for="slide in store.getSliderTopic" :key="slide">
-                      <router-link :to='`/topic/${slide.id}`'>
+                      <router-link :to='`/topic/${slide.id}/${slide.name}`'>
                         <div class="carousel__item">
                           <section class="carousel__item__title">
                              <p>{{ slide.name }}</p>
@@ -118,9 +118,10 @@ export default {
 
     const store = useTopicStore();
     const loading = useLoading({
-    container: true, // Set container to null to use default behavior
+    container: ()=> true, // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
     onCancel: () => {},
+    backgroundColor: '#ffffff',
     });
 
     onMounted(() => {

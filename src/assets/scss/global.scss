@@ -52,7 +52,7 @@ input[type=number]:focus,
   
       .page-link{
         background-color:$color-secondary;
-        color:#fff;
+        color:#fff !important;
       
       }
     }
@@ -62,7 +62,7 @@ input[type=number]:focus,
       background-color:#fff;
       color:$color-secondary;
       &:hover{
-        color:$color-tertiary !important;
+        color:$color-quaternary !important;
       }
     }
 

@@ -1,14 +1,10 @@
 <template>
     <section class="last_five_topic">
-
         <h6 class="text-center mt-5">
-
             <label for="category" class="head-line"> اخر 5 مواضيع فى قسم</label>
-
-            <select class="form-control" v-model='selectCategory' id="category" style="">
+            <select class="form-control" v-model='selectCategory' id="category">
                 <option :value="category.id" v-for="category in categories" :key="category.id"> {{ category.name }} </option>
             </select>
-            <!-- {{ store.getLastFiveTopics != "" ? store.getLastFiveTopics[0].category.name : ""}} -->
         </h6>
         <section class="lines d-flex justify-content-center mb-5">
             <span class="line"></span>
@@ -16,12 +12,12 @@
         <section class="topics" v-if="store.getLastFiveTopics">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4"  v-for="topic in store.getLastFiveTopics" :key="topic.id">
+                    <div class="col-md-4 col-sm-6 col-lg-3"  v-for="topic in store.getLastFiveTopics" :key="topic.id">
                     
                         <section class="card_topic">
                             <section class="card_topic_content">
                                 <div class="section__img">
-                                    <img :src="topic.image" :alt="topic.name" class="img-fluid"/>
+                                    <img v-lazy="{ src: topic.image, loading: 'loading...', error: 'your error image url' }"  :alt="topic.name" class="img-fluid"/>
                                 </div>
                                 
     
@@ -47,7 +43,7 @@
                                 </div>
                             </section>
                             <section class="card_topic_link">
-                                <router-link :to='`/topic/${topic.id}`' class="text-left">
+                                <router-link :to='`/topic/${topic.id}/${topic.name}`' class="text-left">
                                     اقرا المزيد  ....
                                     
                                 </router-link>
@@ -166,7 +162,7 @@ export default {
     const selectCategory = ref(1);
     const routes = useRoute()
     const loading = useLoading({
-    container: true, // Set container to null to use default behavior
+     container: ()=> true,  // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
     onCancel: () => {},
     });

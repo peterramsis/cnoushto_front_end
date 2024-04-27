@@ -47,22 +47,22 @@ const routes = [
     },
   },
   {
-    path: "/topic/:id",
+    path: "/topic/:id/:name",
     name: "topic",
     component: ShowTopic,
     meta: {
       requiresAuth: true,
-      title: "click",
+      title: "topic",
     },
   },
 
   {
-    path: "/topics/:id",
+    path: "/topics/:id/:name",
     name: "topics",
     component: Topics,
     meta: {
       requiresAuth: true,
-      title: "click",
+      title: "category",
     },
   },
 
@@ -76,7 +76,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const topicStore = useTopicStore();
   document.title = to.meta.title ?? "الرئيسية";
+
+  if (to.meta.title == "الرئيسية") {
+    document.title = "الرئيسية";
+  } else if (to.meta.title == "topic") {
+    document.title = to.params.name;
+  } else {
+    document.title = to.params.name;
+  }
+
   const token = localStorage.getItem("token");
   const isAuthenticated = token !== null && token !== "";
 

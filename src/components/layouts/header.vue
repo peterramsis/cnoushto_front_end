@@ -17,7 +17,7 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2" v-if="storeCategories">
                   <li v-for="category in storeCategories.getCategories" :key="category.id">
-                    <router-link  class="dropdown-item"   :to='`/topics/${category.id}`' >{{ category.name }} </router-link>
+                    <router-link  class="dropdown-item"   :to='`/topics/${category.id}/${category.name}`' >{{ category.name }} </router-link>
                   </li>
                 </ul>
               </div>
@@ -71,7 +71,7 @@ export default {
     
     const loading = useLoading({
       color: "green",
-    container: true, // Set container to null to use default behavior
+    container: null, // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
     onCancel: () => {},
     });

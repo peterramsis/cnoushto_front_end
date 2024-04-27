@@ -7,7 +7,7 @@
                     <section class="card_topic">
                         <section class="card_topic_content">
                             <div class="section__img">
-                                <img :src="topic.image" :alt="topic.name" class="img-fluid"/>
+                                <img v-lazy="{ src: topic.image, loading: 'loading...', error: 'error' }" :alt="topic.name" class="img-fluid"/>
                             </div>
                             
 
@@ -23,7 +23,7 @@
                                        <h6>
                                            {{ topic.user }}
                                        </h6>
-                                       <img :src="topic.image_user" :alt="topic.user.name" class="img-fluid rounded" style="width: 40px; oject-fit: cover">
+                                       <img v-lazy="{ src: topic.image_user, loading: 'loading...', error: 'error' }" :alt="topic.user.name" class="img-fluid rounded" style="width: 40px; oject-fit: cover">
                                     </section>
                                  </section>
                             </div>
@@ -33,7 +33,7 @@
                             </div>
                         </section>
                         <section class="card_topic_link">
-                            <router-link :to='`/topic/${topic.id}`' class="text-left">
+                            <router-link :to='`/topic/${topic.id}/${topic.name}`' class="text-left">
                                 اقرا المزيد  ....
                                 
                             </router-link>
@@ -122,7 +122,7 @@ export default {
       const store = useTopicStore();
     const routes = useRoute()
     const loading = useLoading({
-    container: true, // Set container to null to use default behavior
+        container: ()=> true,  // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
     onCancel: () => {},
     });
