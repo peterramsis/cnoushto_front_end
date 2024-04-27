@@ -31,7 +31,7 @@
 }
 </style>
 <script>
-import RegisterComponent from '@/components/component/auth/register.vue';
+import RegisterComponent from '@/components/auth/register.vue';
 
 export default {
   name: "register",

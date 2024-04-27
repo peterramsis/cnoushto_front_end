@@ -31,7 +31,7 @@
   }
   </style>
   <script>
-  import LoginComponent from '@/components/component/auth/login.vue';
+  import LoginComponent from '@/components/auth/login.vue';
   
   export default {
     name: "login",
