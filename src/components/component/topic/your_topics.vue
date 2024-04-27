@@ -1,8 +1,7 @@
 <template>
     <section class="topics" v-if="store.topics">
-
-        <line-head v-if="store.getTopics.data" :text="store.topics.data[0].category.name"></line-head>
         <div class="container">
+            <line-head text="مواضيعك"></line-head>
             <div class="row">
                 <div class="col-md-4"  v-for="topic in store.topics.data" :key="topic.id">
                 
@@ -111,22 +110,20 @@
 
 <script>
 
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useTopicStore } from '@/stores/modules/topic';
 import { useLoading } from 'vue-loading-overlay';
 import { useRoute } from 'vue-router';
 
 
+
 export default {
   name: 'topics',
-  props: {
-    title: String
-  },
-  setup(props) {
-    
-    const store = useTopicStore();
-    const routes = useRoute();
-    const title= ref("");
+  
+  setup() {
+
+      const store = useTopicStore();
+    const routes = useRoute()
     const loading = useLoading({
         container: ()=> true,  // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
@@ -135,8 +132,8 @@ export default {
 
     
     onMounted(() => {
-     
-        store.getTopicsAction(loading, routes.params.id);
+        console.log("click");
+        store.getYourTopicsAction(loading);
     })
 
     
@@ -144,14 +141,14 @@ export default {
 
     return { 
         store,
-       
+        
         handlePaginationChange
     }
 
     
 
     function handlePaginationChange(newPage) {
-              store.getTopicsAction(loading, routes.params.id , newPage);
+              store.getYourTopicsAction(loading, newPage);
       }
 
   }

@@ -10,6 +10,7 @@ import HeaderApp from "@/components/layouts/header.vue";
 import FooterApp from "@/components/layouts/footer.vue";
 import ButtonApp from "@/components/component/button.vue";
 import SliderApp from "@/components/component/slider.vue";
+import LineHead from "@/components/component/line_head.vue";
 import LastFiveTopic from "@/components/component/topic/last_five_topic_category.vue";
 import { Bootstrap5Pagination } from "laravel-vue-pagination";
 import router from "./router";
@@ -25,6 +26,7 @@ app.component("footer-app", FooterApp);
 app.component("slider-app", SliderApp);
 app.component("LastFiveTopic", LastFiveTopic);
 app.component("Bootstrap5Pagination", Bootstrap5Pagination);
+app.component("LineHead", LineHead);
 
 app.use(VueLazyLoad, {
   // options...

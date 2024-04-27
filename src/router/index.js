@@ -6,6 +6,7 @@ import Home from "@/views/home.vue";
 import Profile from "@/views/user/profile.vue";
 import ShowTopic from "@/views/topic/show.vue";
 import Topics from "@/views/topic/topics.vue";
+import YourTopics from "@/views/topic/your_topic.vue";
 import PageNotFound from "@/components/component/not-found.vue";
 import { useTopicStore } from "@/stores/modules/topic";
 
@@ -65,6 +66,15 @@ const routes = [
       title: "category",
     },
   },
+  {
+    path: "/your_topics",
+    name: "your_topics",
+    component: YourTopics,
+    meta: {
+      requiresAuth: true,
+      title: "مواضعيك",
+    },
+  },
 
   { path: "/:pathMatch(.*)*", component: PageNotFound },
 ];
@@ -77,14 +87,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const topicStore = useTopicStore();
-  document.title = to.meta.title ?? "الرئيسية";
+  // document.title = to.meta.title ?? "الرئيسية";
 
-  if (to.meta.title == "الرئيسية") {
-    document.title = "الرئيسية";
-  } else if (to.meta.title == "topic") {
+  if (to.meta.title == "topic") {
+    document.title = to.params.name;
+  } else if (to.meta.title == "category") {
     document.title = to.params.name;
   } else {
-    document.title = to.params.name;
+    document.title = to.meta.title;
   }
 
   const token = localStorage.getItem("token");

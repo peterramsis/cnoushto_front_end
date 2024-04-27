@@ -23,6 +23,8 @@
               </div>
              </li>
 
+             <li><router-link to="/your_topics" class="nav-link" exact v-if="token">مواضعيك</router-link></li>
+
 
              <li v-if="token">
               <div class="dropdown">
