@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
-import { getData } from "@/utils/api";
+import { getData, postData, deleteData } from "@/utils/api";
 import Swal from "sweetalert2";
+import url from "../../../utils/constants";
 
 export const useTopicStore = defineStore("topic", {
   state: () => ({
@@ -162,6 +163,51 @@ export const useTopicStore = defineStore("topic", {
             confirmButtonText: "اوك",
           });
         });
+    },
+
+    addFavoriteTopic(payload) {
+      const {
+        page = 1,
+        size = 5,
+        user_id,
+        topic_id,
+        id_category,
+        type,
+        loading,
+      } = payload;
+      postData("favorite", {
+        user_id: user_id,
+        topic_id: topic_id,
+      }).then((res) => {
+        if (type === "topics") {
+          this.getTopicsAction(loading, id_category, page, size);
+        } else if (type === "yourTopic") {
+          this.getYourTopicsAction(loading, page, size);
+        } else {
+          this.getYourFavoriteTopicsAction(loading, page, size);
+        }
+        Swal.fire("تم  الاضافة فى المواضيع المفضلة بنجاح");
+      });
+    },
+    removeFavoriteTopic(payload) {
+      const {
+        page = 1,
+        size = 5,
+        topic_id,
+        id_category,
+        type,
+        loading,
+      } = payload;
+      deleteData(url + "favorite/" + topic_id).then((res) => {
+        if (type === "topics") {
+          this.getTopicsAction(loading, id_category, page, size);
+        } else if (type === "yourTopic") {
+          this.getYourTopicsAction(loading, page, size);
+        } else {
+          this.getYourFavoriteTopicsAction(loading, page, size);
+        }
+        Swal.fire("تم  المسح بنجاح");
+      });
     },
   },
   getters: {

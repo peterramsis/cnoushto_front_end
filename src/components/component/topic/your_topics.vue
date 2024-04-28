@@ -39,6 +39,12 @@
                                 
                             </router-link>
                             <span v-for="year in topic.years" :key="year" class="m-3" style="font-size:12px"> # {{ year.name }}  </span>
+
+                            <section class="favorite d-flex justify-content-end" @click="topic.favorite ? removeFavorite(topic.id, topic.category.id) :addFavorite(topic.id, topic.category.id)">
+                                <span class="material-icons-sharp">
+                                    {{ topic.favorite ? 'favorite' : 'favorite_border' }}
+                                </span>
+                            </section>
                         </section>
                </section>
                 
@@ -114,7 +120,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 import { useTopicStore } from '@/stores/modules/topic';
 import { useLoading } from 'vue-loading-overlay';
 import { useRoute } from 'vue-router';
-
+import { useAuthStore } from '@/stores/modules/auth';
 
 
 export default {
@@ -124,9 +130,9 @@ export default {
   },
   setup(props) {
 
-      const store = useTopicStore();
+    const store = useTopicStore();
     const routes = useRoute();
-    
+    const storeUser = useAuthStore();
     const loading = useLoading({
         container: ()=> true,  // Set container to null to use default behavior
     canCancel: () => true, // Enable the canCancel option
@@ -148,12 +154,40 @@ export default {
               store.getYourTopicsAction(loading, newPage);
       }
 
+      function addFavorite(topicId,idCategory){
+        store.addFavoriteTopic({
+            page: 1,
+            size: 5,
+            user_id : storeUser.user.id,
+            topic_id: topicId,
+            id_category: idCategory,
+            type: "yourTopic",
+            loading
+        });
+    }
+
+
+    function removeFavorite(topicId,idCategory){
+        store.removeFavoriteTopic({
+            page: 1,
+            size: 5,
+            user_id : storeUser.user.id,
+            topic_id: topicId,
+            id_category: idCategory,
+            type: "yourTopic",
+            loading
+        });
+    }
+
+
     
 
     return { 
         store,
         handlePaginationChange,
-        title
+        title,
+        addFavorite,
+        removeFavorite,
     }
 
     

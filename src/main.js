@@ -27,6 +27,7 @@ app.component("slider-app", SliderApp);
 app.component("LastFiveTopic", LastFiveTopic);
 app.component("Bootstrap5Pagination", Bootstrap5Pagination);
 app.component("LineHead", LineHead);
+import "material-icons/iconfont/material-icons.css";
 
 app.use(VueLazyLoad, {
   // options...

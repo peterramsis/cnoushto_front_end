@@ -33,6 +33,8 @@
                             <div class="section-title">
                                 <h5> {{ topic.name }} </h5>
                             </div>
+
+                            
                         </section>
                         <section class="card_topic_link">
                             <router-link :to='`/topic/${topic.id}/${topic.name}`' class="text-left">
@@ -40,6 +42,12 @@
                                 
                             </router-link>
                             <span v-for="year in topic.years" :key="year" class="m-3" style="font-size:12px"> # {{ year.name }}  </span>
+
+                            <section class="favorite d-flex justify-content-end" @click="topic.favorite ? removeFavorite(topic.id, topic.category.id) :addFavorite(topic.id, topic.category.id)">
+                                <span class="material-icons-sharp">
+                                    {{ topic.favorite ? 'favorite' : 'favorite_border' }}
+                                </span>
+                            </section>
                         </section>
                </section>
                 
@@ -115,6 +123,7 @@ import { onMounted, ref, watch } from 'vue';
 import { useTopicStore } from '@/stores/modules/topic';
 import { useLoading } from 'vue-loading-overlay';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/modules/auth';
 
 
 export default {
@@ -125,6 +134,7 @@ export default {
   setup(props) {
     
     const store = useTopicStore();
+    const storeUser = useAuthStore();
     const routes = useRoute();
     const title= ref("");
     const loading = useLoading({
@@ -139,12 +149,38 @@ export default {
         store.getTopicsAction(loading, routes.params.id);
     })
 
+    function addFavorite(topicId,idCategory){
+        store.addFavoriteTopic({
+            page: 1,
+            size: 5,
+            user_id : storeUser.user.id,
+            topic_id: topicId,
+            id_category: idCategory,
+            type: "topics",
+            loading
+        });
+    }
+
+
+    function removeFavorite(topicId,idCategory){
+        store.removeFavoriteTopic({
+            page: 1,
+            size: 5,
+            user_id : storeUser.user.id,
+            topic_id: topicId,
+            id_category: idCategory,
+            type: "topics",
+            loading
+        });
+    }
+
     
 
 
     return { 
         store,
-       
+        addFavorite,
+        removeFavorite,
         handlePaginationChange
     }
 
